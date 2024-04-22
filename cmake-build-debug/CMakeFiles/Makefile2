@@ -53,6 +53,7 @@ CMAKE_BINARY_DIR = D:\leti\prog\sem2\courseWork\dbProgram\cmake-build-debug
 
 # The main recursive "all" target.
 all: CMakeFiles/dbProgram.dir/all
+all: CMakeFiles/CopyFile.dir/all
 
 .PHONY : all
 
@@ -63,6 +64,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/dbProgram.dir/clean
+clean: CMakeFiles/CopyFile.dir/clean
 
 .PHONY : clean
 
@@ -70,15 +72,15 @@ clean: CMakeFiles/dbProgram.dir/clean
 # Target rules for target CMakeFiles/dbProgram.dir
 
 # All Build rule for target.
-CMakeFiles/dbProgram.dir/all:
+CMakeFiles/dbProgram.dir/all: CMakeFiles/CopyFile.dir/all
 	$(MAKE) -f CMakeFiles\dbProgram.dir\build.make CMakeFiles/dbProgram.dir/depend
 	$(MAKE) -f CMakeFiles\dbProgram.dir\build.make CMakeFiles/dbProgram.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\leti\prog\sem2\courseWork\dbProgram\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target dbProgram"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\leti\prog\sem2\courseWork\dbProgram\cmake-build-debug\CMakeFiles --progress-num=2,3 "Built target dbProgram"
 .PHONY : CMakeFiles/dbProgram.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/dbProgram.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\leti\prog\sem2\courseWork\dbProgram\cmake-build-debug\CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\leti\prog\sem2\courseWork\dbProgram\cmake-build-debug\CMakeFiles 3
 	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/dbProgram.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\leti\prog\sem2\courseWork\dbProgram\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/dbProgram.dir/rule
@@ -92,6 +94,33 @@ dbProgram: CMakeFiles/dbProgram.dir/rule
 CMakeFiles/dbProgram.dir/clean:
 	$(MAKE) -f CMakeFiles\dbProgram.dir\build.make CMakeFiles/dbProgram.dir/clean
 .PHONY : CMakeFiles/dbProgram.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/CopyFile.dir
+
+# All Build rule for target.
+CMakeFiles/CopyFile.dir/all:
+	$(MAKE) -f CMakeFiles\CopyFile.dir\build.make CMakeFiles/CopyFile.dir/depend
+	$(MAKE) -f CMakeFiles\CopyFile.dir\build.make CMakeFiles/CopyFile.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\leti\prog\sem2\courseWork\dbProgram\cmake-build-debug\CMakeFiles --progress-num=1 "Built target CopyFile"
+.PHONY : CMakeFiles/CopyFile.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/CopyFile.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\leti\prog\sem2\courseWork\dbProgram\cmake-build-debug\CMakeFiles 1
+	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/CopyFile.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\leti\prog\sem2\courseWork\dbProgram\cmake-build-debug\CMakeFiles 0
+.PHONY : CMakeFiles/CopyFile.dir/rule
+
+# Convenience name for target.
+CopyFile: CMakeFiles/CopyFile.dir/rule
+
+.PHONY : CopyFile
+
+# clean rule for target.
+CMakeFiles/CopyFile.dir/clean:
+	$(MAKE) -f CMakeFiles\CopyFile.dir\build.make CMakeFiles/CopyFile.dir/clean
+.PHONY : CMakeFiles/CopyFile.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
