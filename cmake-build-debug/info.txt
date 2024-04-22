@@ -1,0 +1,4 @@
+This program can save your songs and do things like:
+- "first thing"
+- "second thing"
+- ...
