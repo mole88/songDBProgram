@@ -170,31 +170,24 @@ char **split(char *str, char sep)
 {
     int wordsCount = 1;
     int len = strlen(str);
+    int ind = 0;
+    int div = 0;
+    char **result = NULL;
 
     for (int i = 0; i < len; i++)
         if (str[i] == sep)
             wordsCount++;
+    result = (char**)malloc(sizeof(char*)*wordsCount);
 
-    char **result = (char**)malloc(sizeof(char*)*wordsCount);
-    for (int i = 0; i < wordsCount; i++)
-        result[i] = (char*)malloc(sizeof(char)*STR_SIZE);
-
-    int ind = 0;
-    int dif = 0;
-    for (int i = 0; i < len; ++i) {
-        if (str[i] != sep)
-            result[ind][i-dif] = str[i];
-        else{
-            result[ind][i-dif] = '\0';
+    for (int j = 0; j < len; ++j) {
+        if (str[j] == sep || str[j] == '\n'){
+            result[ind] = (char*)malloc(sizeof(char)*STR_SIZE);
+            strncpy(result[ind], &str[div], j-div);
+            result[ind][j-div] = '\0';
+            div = j + 1;
             ind++;
-            dif=i+1;
         }
     }
-    if (result[ind][len-dif-1] == '\n')
-        result[ind][len-dif-1] = '\0';
-    else
-        result[ind][len-dif] = '\0';
-
     return result;
 }
 void printSong(Song song){
@@ -420,7 +413,7 @@ int compareByAuthor(const void *a, const void *b){
     Song *song1 = (Song*)a;
     Song *song2 = (Song*)b;
 
-    for (int i = 0; i < song1->AuthorsCount; ++i) {//TODO: make normal algorithm
+    for (int i = 0; i < song1->AuthorsCount; ++i) {
         for (int j = 0; j < song2->AuthorsCount; ++j) {
             if (strcmp(song1->Authors[i], song2->Authors[j])==0){
                 flag = 1;
@@ -507,6 +500,7 @@ void menuFind(Song *db, int dbSize){
             puts("Bad enter");
             return;
     }
+    clearScreen();
     printDB(result, resultSize);
 }
 int enterField(){
@@ -546,5 +540,6 @@ void menuSort(Song *db, int dbSize){
             puts("Bad enter");
             return;
     }
+    clearScreen();
     printDB(db, dbSize);
 }

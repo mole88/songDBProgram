@@ -1,0 +1,11 @@
+"D:\Apps\CLion\CLion 2020.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - MinGW Makefiles" D:\leti\prog\sem2\courseWork\dbProgram
+-- The C compiler identification is GNU 6.3.0
+-- Check for working C compiler: D:/Apps/mingw/bin/gcc.exe
+-- Check for working C compiler: D:/Apps/mingw/bin/gcc.exe -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release

@@ -1,0 +1,4 @@
+D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/CMakeFiles/rebuild_cache.dir
+D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/CMakeFiles/dbProgram.dir
+D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/CMakeFiles/CopyFile.dir
+D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/CMakeFiles/edit_cache.dir

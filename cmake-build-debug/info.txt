@@ -1,4 +1,5 @@
-This program can save your songs and do things like:
-- "first thing"
-- "second thing"
-- ...
+This program can save songs and do things like:
+- add/delete/edit your songs
+- find by ID/Name/Author/Album/Lang/Genre/Year
+- sort by ID/Name/Author/Album/Lang/Genre/Year
+- save all information to csv file
