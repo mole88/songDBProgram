@@ -63,21 +63,31 @@
 					<DistClean command="D:/Apps/mingw/bin/mingw32-make.exe -f &quot;D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="CopyFile">
-				<Option working_dir="D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="D:/Apps/mingw/bin/mingw32-make.exe -f &quot;D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/Makefile&quot;  VERBOSE=1 CopyFile"/>
-					<CompileFile command="D:/Apps/mingw/bin/mingw32-make.exe -f &quot;D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="D:/Apps/mingw/bin/mingw32-make.exe -f &quot;D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="D:/Apps/mingw/bin/mingw32-make.exe -f &quot;D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
 			<Target title="edit_cache">
 				<Option working_dir="D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release"/>
 				<Option type="4"/>
 				<MakeCommands>
 					<Build command="D:/Apps/mingw/bin/mingw32-make.exe -f &quot;D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="D:/Apps/mingw/bin/mingw32-make.exe -f &quot;D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Apps/mingw/bin/mingw32-make.exe -f &quot;D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Apps/mingw/bin/mingw32-make.exe -f &quot;D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="CopyDbFile">
+				<Option working_dir="D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Apps/mingw/bin/mingw32-make.exe -f &quot;D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/Makefile&quot;  VERBOSE=1 CopyDbFile"/>
+					<CompileFile command="D:/Apps/mingw/bin/mingw32-make.exe -f &quot;D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Apps/mingw/bin/mingw32-make.exe -f &quot;D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Apps/mingw/bin/mingw32-make.exe -f &quot;D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="CopyInfoFile">
+				<Option working_dir="D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Apps/mingw/bin/mingw32-make.exe -f &quot;D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/Makefile&quot;  VERBOSE=1 CopyInfoFile"/>
 					<CompileFile command="D:/Apps/mingw/bin/mingw32-make.exe -f &quot;D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="D:/Apps/mingw/bin/mingw32-make.exe -f &quot;D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="D:/Apps/mingw/bin/mingw32-make.exe -f &quot;D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
