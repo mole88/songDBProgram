@@ -74,8 +74,8 @@ clean: CMakeFiles/CopyInfoFile.dir/clean
 # Target rules for target CMakeFiles/dbProgram.dir
 
 # All Build rule for target.
-CMakeFiles/dbProgram.dir/all: CMakeFiles/CopyInfoFile.dir/all
 CMakeFiles/dbProgram.dir/all: CMakeFiles/CopyDbFile.dir/all
+CMakeFiles/dbProgram.dir/all: CMakeFiles/CopyInfoFile.dir/all
 	$(MAKE) -f CMakeFiles\dbProgram.dir\build.make CMakeFiles/dbProgram.dir/depend
 	$(MAKE) -f CMakeFiles\dbProgram.dir\build.make CMakeFiles/dbProgram.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\leti\prog\sem2\courseWork\dbProgram\cmake-build-release\CMakeFiles --progress-num=3,4 "Built target dbProgram"

@@ -1,4 +1,6 @@
 # Hashes of file build rules.
 4d68aab184dd5fe26867c6a56f5c59c0 .
-2a89a2ea9dc8997cafef8a3071d1e447 CMakeFiles/CopyFile
+2a89a2ea9dc8997cafef8a3071d1e447 CMakeFiles/CopyDbFile
+2a89a2ea9dc8997cafef8a3071d1e447 CMakeFiles/CopyInfoFile
+fdf17e7e7d2f789822c7bc8161b3fa72 README
 5afa4dc527e494fba01b3beda5e87cca db.csv

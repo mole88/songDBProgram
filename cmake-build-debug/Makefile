@@ -123,17 +123,30 @@ dbProgram/fast:
 .PHONY : dbProgram/fast
 
 #=============================================================================
-# Target rules for targets named CopyFile
+# Target rules for targets named CopyDbFile
 
 # Build rule for target.
-CopyFile: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 CopyFile
-.PHONY : CopyFile
+CopyDbFile: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 CopyDbFile
+.PHONY : CopyDbFile
 
 # fast build rule for target.
-CopyFile/fast:
-	$(MAKE) -f CMakeFiles\CopyFile.dir\build.make CMakeFiles/CopyFile.dir/build
-.PHONY : CopyFile/fast
+CopyDbFile/fast:
+	$(MAKE) -f CMakeFiles\CopyDbFile.dir\build.make CMakeFiles/CopyDbFile.dir/build
+.PHONY : CopyDbFile/fast
+
+#=============================================================================
+# Target rules for targets named CopyInfoFile
+
+# Build rule for target.
+CopyInfoFile: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 CopyInfoFile
+.PHONY : CopyInfoFile
+
+# fast build rule for target.
+CopyInfoFile/fast:
+	$(MAKE) -f CMakeFiles\CopyInfoFile.dir\build.make CMakeFiles/CopyInfoFile.dir/build
+.PHONY : CopyInfoFile/fast
 
 main.obj: main.c.obj
 
@@ -170,8 +183,9 @@ help:
 	@echo ... depend
 	@echo ... rebuild_cache
 	@echo ... dbProgram
-	@echo ... CopyFile
 	@echo ... edit_cache
+	@echo ... CopyDbFile
+	@echo ... CopyInfoFile
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

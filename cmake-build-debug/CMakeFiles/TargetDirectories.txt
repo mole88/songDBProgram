@@ -1,4 +1,5 @@
 D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-debug/CMakeFiles/dbProgram.dir
-D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-debug/CMakeFiles/CopyFile.dir
 D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-debug/CMakeFiles/CopyDbFile.dir
+D:/leti/prog/sem2/courseWork/dbProgram/cmake-build-debug/CMakeFiles/CopyInfoFile.dir

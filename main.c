@@ -3,7 +3,7 @@
 #include <string.h>
 
 #define STR_SIZE 2048
-#define INFO_FILE_PATH "./info.txt"
+#define INFO_FILE_PATH "./README"
 #define DB_FILE_PATH "./db.csv"
 
 struct SongStruct{
@@ -98,14 +98,17 @@ void printInfo(){
     puts(info);
 }
 void getTextFromFile(char str[], char *path, int lim){
-    FILE *file = fopen(path, "a+t");
-    char c;
-    int i = 0;
-    while(((c = getc(file)) != EOF) && (i < lim-1)){
-        str[i]=c;
-        i++;
+    FILE *file = fopen(path, "r");
+    if (file){
+        char c;
+        int i = 0;
+        while(((c = getc(file)) != EOF) && (i < lim-1)){
+            str[i]=c;
+            i++;
+        }
+        fclose(file);
     }
-    fclose(file);
+    else perror("Error opening file");
 }
 void nGets(char str[], int lim){
     char curChar;
@@ -123,33 +126,42 @@ int countLinesInFile(char *path) {
     int linesCount = 0;
 
     file = fopen(path, "r");
-    if (file == NULL)
-        linesCount = -1;
-
-    while (fgets(buffer, sizeof(buffer), file) != NULL)
-        linesCount++;
-    fclose(file);
+    if (file){
+        while (fgets(buffer, sizeof(buffer), file) != NULL)
+            linesCount++;
+        fclose(file);
+    }
+    else perror("Error opening file");
 
     return linesCount;
 }
 Song *getDB(char *path, int *dbSize){
-    FILE *file = fopen(path, "r");
-    int linesCount = countLinesInFile(path)-1;
     char line[STR_SIZE];
-
-    Song *db = malloc(sizeof(Song)*linesCount);
+    int linesCount;
+    FILE *file;
+    Song *db = NULL;
     Song curSong;
-    fgets(line, STR_SIZE, file);
 
-    int i = 0;
-    while (fgets(line, STR_SIZE, file)){
-        curSong = creatSong(split(line, ','));
-        db[i] = curSong;
-        i++;
+    file = fopen(path, "r");
+    if (file){
+        linesCount = countLinesInFile(path)-1;
+
+        db = malloc(sizeof(Song)*linesCount);
+        if (db){
+            fgets(line, STR_SIZE, file);
+            int i = 0;
+            while (fgets(line, STR_SIZE, file)){
+                curSong = creatSong(split(line, ','));
+                db[i] = curSong;
+                i++;
+            }
+            *dbSize = linesCount;
+        }
+        else perror("Memory allocation error");
+        fclose(file);
     }
-    *dbSize = linesCount;
+    else perror("Error opening file");
 
-    fclose(file);
     return db;
 }
 Song creatSong(char **params){
@@ -177,17 +189,23 @@ char **split(char *str, char sep)
     for (int i = 0; i < len; i++)
         if (str[i] == sep)
             wordsCount++;
-    result = (char**)malloc(sizeof(char*)*wordsCount);
 
-    for (int j = 0; j < len; ++j) {
-        if (str[j] == sep || str[j] == '\n'){
-            result[ind] = (char*)malloc(sizeof(char)*STR_SIZE);
-            strncpy(result[ind], &str[div], j-div);
-            result[ind][j-div] = '\0';
-            div = j + 1;
-            ind++;
+    result = (char**)malloc(sizeof(char*)*wordsCount);
+    if (result){
+        for (int j = 0; j < len; ++j) {
+            if (str[j] == sep || str[j] == '\n'){
+                result[ind] = (char*)malloc(sizeof(char)*STR_SIZE);
+                if (result[ind]){
+                    strncpy(result[ind], &str[div], j-div);
+                    result[ind][j-div] = '\0';
+                    div = j + 1;
+                }
+                else perror("Memory allocation error");
+                ind++;
+            }
         }
     }
+    else perror("Memory allocation error");
     return result;
 }
 void printSong(Song song){
@@ -227,57 +245,80 @@ char **inputSong(){
     char authorsStr[STR_SIZE];
     int authorsCount;
     char menuItems[][STR_SIZE] = {"ID", "name", "authors count", "authors", "album", "language", "genre", "year"};
+    int errFlag = 0;
     authorsStr[0] = '\0';
 
     params = malloc(sizeof(char*)*8);
-    for (int j = 0; j < 8; ++j)
-        params[j] = malloc(sizeof(char)*2024);
-
-    fflush(stdin);
-    for (int k = 1; k < 8; ++k) {
-        if (k == 3){
-            for (int i = 0; i < authorsCount; ++i) {
-                printf("Enter author %d: ", i+1);
-                nGets(inStr, STR_SIZE);
-                strcat(authorsStr, inStr);
-                strcat(authorsStr, ";");
+    if (params){
+        for (int j = 0; j < 8; ++j){
+            params[j] = malloc(sizeof(char)*2024);
+            if (params[j] == NULL){
+                errFlag = 1;
+                j = 8;
             }
-            strcpy(params[3], authorsStr);
         }
-        else{
-            printf("Enter song %s: ", menuItems[k]);
-            nGets(inStr, STR_SIZE);
-            strcpy(params[k], inStr);
-            if (k == 2)
-                authorsCount = atoi(inStr);
+        if (errFlag == 0){
+            fflush(stdin);
+            for (int k = 1; k < 8; ++k) {
+                if (k == 3){
+                    for (int i = 0; i < authorsCount; ++i) {
+                        printf("Enter author %d: ", i+1);
+                        nGets(inStr, STR_SIZE);
+                        strcat(authorsStr, inStr);
+                        strcat(authorsStr, ";");
+                    }
+                    strcpy(params[3], authorsStr);
+                }
+                else{
+                    printf("Enter song %s: ", menuItems[k]);
+                    nGets(inStr, STR_SIZE);
+                    strcpy(params[k], inStr);
+                    if (k == 2)
+                        authorsCount = atoi(inStr);
+                }
+            }
         }
+        else perror("Memory allocation error");
     }
+    else perror("Memory allocation error");
+
     return params;
 }
 void addSong(Song **db, int *dbSize, Song *newSong){
     newSong->ID = (*db)[*dbSize-1].ID + 1;
     *db = realloc(*db, sizeof(Song) * (*dbSize + 1));
-    (*db)[*dbSize] = *newSong;
-    (*dbSize)++;
+    if (*db){
+        (*db)[*dbSize] = *newSong;
+        (*dbSize)++;
+    }
+    else perror("Memory allocation error");
 }
 void saveDB(char *path, Song *db, int dbSize){
     FILE *file = fopen(path, "wt");
-    fputs("ID,name,authorsCount,authors,album,lang,genre,year\n" ,file);
-    for (int i = 0; i < dbSize; ++i)
-        fputs(songToString(db[i]), file);
-    fclose(file);
+    if (file){
+        fputs("ID,name,authorsCount,authors,album,lang,genre,year\n" ,file);
+        for (int i = 0; i < dbSize; ++i)
+            fputs(songToString(db[i]), file);
+        fclose(file);
+    }
+    else perror("Error opening file");
 }
 char *songToString(Song song){
-    char *line = malloc(sizeof(char)*STR_SIZE);
+    char *line = NULL;
     char authorsStr[STR_SIZE];
-    authorsStr[0] = '\0';
 
-    for (int i = 0; i < song.AuthorsCount; ++i) {
-        strcat(authorsStr, song.Authors[i]);
-        strcat(authorsStr, ";");
+    line = malloc(sizeof(char)*STR_SIZE);
+    if (line){
+        authorsStr[0] = '\0';
+        for (int i = 0; i < song.AuthorsCount; ++i) {
+            strcat(authorsStr, song.Authors[i]);
+            strcat(authorsStr, ";");
+        }
+        sprintf(line, "%d,%s,%d,%s,%s,%s,%s,%d\n",
+                song.ID, song.Name, song.AuthorsCount, authorsStr, song.Album, song.Lang, song.Genre, song.Year);
     }
-    sprintf(line, "%d,%s,%d,%s,%s,%s,%s,%d\n",
-            song.ID, song.Name, song.AuthorsCount, authorsStr, song.Album, song.Lang, song.Genre, song.Year);
+    else perror("Memory allocation error");
+
     return line;
 }
 int deleteSong(Song **db, int songID, int *dbSize) {
@@ -292,7 +333,12 @@ int deleteSong(Song **db, int songID, int *dbSize) {
     }
     if (dFlag) {
         *db = realloc(*db, sizeof(Song) * (*dbSize - 1));
-        *dbSize = *dbSize - 1;
+        if (*db)
+            *dbSize = *dbSize - 1;
+        else{
+            perror("Memory allocation error");
+            dFlag = 0;
+        }
     }
     return dFlag;
 }
@@ -315,19 +361,21 @@ void freeSongMem(Song *song){
     for (int i = 0; i < song->AuthorsCount; ++i)
         free(song->Authors[i]);
     free(song->Authors);
+    free(song);
 }
 void menuEdit(Song **db, int dbSize){
     int songID;
     Song *curSong;
+    int flag = 0;
     puts("Enter song ID for edit: ");
     scanf("%d", &songID);
 
-    for (int i = 0; i < dbSize; ++i) {
+    for (int i = 0; i < dbSize && flag == 0; ++i) {
         curSong = &(*db)[i];
         if (curSong->ID == songID){
             printSong(*curSong);
             editSong(curSong);
-            break;
+            flag = 1;
         }
     }
 }
@@ -351,12 +399,21 @@ void editSong(Song *song){
             song->AuthorsCount = intParam;
 
             song->Authors = malloc(sizeof(char*)*intParam);
-            for (int i = 0; i < intParam; ++i) {
-                song->Authors[i] = malloc(sizeof(char)*STR_SIZE);
-                printf("Enter author %d: ", i+1);
-                nGets(strParam, STR_SIZE);
-                song->Authors[i] = strParam;
+            if (song->Authors){
+                for (int i = 0; i < intParam; ++i) {
+                    song->Authors[i] = malloc(sizeof(char)*STR_SIZE);
+                    if (song->Authors[i]){
+                        printf("Enter author %d: ", i+1);
+                        nGets(strParam, STR_SIZE);
+                        song->Authors[i] = strParam;
+                    }
+                    else{
+                        i = intParam;
+                        perror("Memory allocation error");
+                    }
+                }
             }
+            else perror("Memory allocation error");
             break;
         case 4: //Album
             nGets(strParam, STR_SIZE);
@@ -442,7 +499,13 @@ Song *findSongs(Song *db, int dbSize, void *target, int (*compare)(const void*, 
     for (int i = 0; i < dbSize; ++i) {
         if (compare(target, &db[i]) == 0){
             findSongs = realloc(findSongs, sizeof(Song)*(foundCount+1));
-            findSongs[foundCount++] = db[i];
+            if (findSongs)
+                findSongs[foundCount++] = db[i];
+            else{
+                i = dbSize;
+                perror("Memory allocation error");
+                foundCount = 0;
+            }
         }
     }
     *resultSize = foundCount;
@@ -473,8 +536,11 @@ void menuFind(Song *db, int dbSize){
             nGets(strParam, STR_SIZE);
             target.AuthorsCount = 1;
             target.Authors = malloc(sizeof(char)*2048);
-            target.Authors[0] = strParam;
-            result = findSongs(db, dbSize, &target, compareByAuthor, &resultSize);
+            if (target.Authors){
+                target.Authors[0] = strParam;
+                result = findSongs(db, dbSize, &target, compareByAuthor, &resultSize);
+            }
+            else perror("Memory allocation error");
             break;
         case 4: //Album
             nGets(strParam, STR_SIZE);
